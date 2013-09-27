@@ -20,6 +20,14 @@ $(document).ready(function() {
       console.log(data);
       $('#save_log').prop('disabled', false);
       $('#logFormModal').modal('hide');
+
+      // alter the selected slots to reflect the new selection
+      var selected_slots = $('.time-selectable').find('.ui-selected');
+      selected_slots.removeClass('time-avail-segment ui-selectee ui-selected').addClass('time-disabled-segment');
+
+      // add the new log to the bottom of the list, may add some animation
+      var log_html = data.html_str;
+      $('#activity-list').append($('<li>').html(log_html));
     });
   });
 

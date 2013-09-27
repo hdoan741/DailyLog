@@ -19,10 +19,10 @@
   <div class="col-md-8">
     <h3>Activity</h3>
     <hr>
-    <ul>
+    <ul id="activity-list">
       <% @logs.each do |log| %>
         <% if log.start_time && log.end_time %>
-          <li><%= log.start_time.strftime("%H:%M") %> - <%= log.end_time.strftime("%H:%M") %>: <%= log.content.capitalize %></li>
+          <li><%= log_to_html(log) %></li>
         <% end %>
       <% end %>
     </ul>
