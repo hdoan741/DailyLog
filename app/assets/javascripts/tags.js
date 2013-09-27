@@ -23,4 +23,32 @@ $(document).ready(function() {
       console.log(data);
     });
   });
+
+  $('.remove-tag').click(function() {
+    $(this).prop('disabled', true);
+    var row = $(this).parents('tr');
+
+    // get the id of the tag
+    var tag_id = $(this).attr('data-tag-id');
+    console.log(tag_id);
+
+    // show the confirmation dialog
+    $('#remove_tag_confirmed').click(function() {
+      $('#remove_tag_confirmed').prop('disabled', true);
+
+      $.ajax({
+        type: "DELETE",
+        url: '/tags/' + tag_id,
+        success: function() {
+          $(row).remove();
+          $('#tagRemoveConfirm').modal('hide');
+          $('#remove_tag_confirmed').off('click');
+          $('#remove_tag_confirmed').prop('disabled', false);
+        }
+      });
+    });
+
+    $('#remove_tag_confirmed').prop('disabled', false);
+    $('#tagRemoveConfirm').modal('show');
+  });
 });
