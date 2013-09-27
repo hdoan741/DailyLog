@@ -1,0 +1,42 @@
+<a data-toggle="modal" href="#logFormModal" class="btn btn-primary btn-lg">Create New Log</a>
+
+<ul>
+  <% @logs.each do |log| %>
+    <li>
+      <%= log.content %>
+    </li>
+  <% end %>
+</ul>
+
+<div class="modal fade" id="logFormModal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Log from (start_time) to (end_time), <%= @current_date %></h4>
+      </div>
+      <div class="modal-body">
+        <form id="logForm">
+          <input type="hidden" name="log_id"></input>
+          <input type="hidden" id="logDateHidden" value="<%= @current_date %>"></input>
+          <input type="hidden" name="start_time"></input>
+          <div class="form-group">
+            <label for="logContentInput">Content</label>
+            <input class="form-control" id="logContentInput">
+          </div>
+          <div class="form-group">
+            <label for="logExtraTextarea">Extra</label>
+            <textarea rows="5" class="form-control" id="logExtraTextarea"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="logTagArea">Tags</label>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" id="save_log" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
