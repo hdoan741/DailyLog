@@ -1,3 +1,11 @@
 // Place all the styles related to the timeline controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.time-segment {
+  width: 200px;
+}
+
+.ui-selecting { background: #FECA40; }
+
+.ui-selected { background: #F39814; color: white; }

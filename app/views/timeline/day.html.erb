@@ -1,19 +1,37 @@
-<a data-toggle="modal" href="#logFormModal" class="btn btn-primary btn-lg">Create New Log</a>
+<div class="page-header">
+  <h1><%= @current_date.strftime("%A, %d %B, %Y") %></h1>
+</div>
 
 <ul>
   <% @logs.each do |log| %>
     <li>
       <%= log.content %>
+      <%= log.to_json %>
     </li>
   <% end %>
 </ul>
+
+<div class="span6" style="width: 300px;">
+  <table class="table table-bordered time-selectable">
+    <% 48.times.each do |i| %>
+      <tr>
+        <td><%= i.even? ? "#{i / 2}:00"  : '--'  %></td>
+        <td class="time-segment">
+          <input type="hidden" class="time-slot-start" value="<%= "%d:%02d" % [i/2, (i%2) * 30] %>">
+          <% j = i + 1 %>
+          <input type="hidden" class="time-slot-end" value="<%= "%d:%02d" % [j/2, (j%2) * 30] %>">
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>
 
 <div class="modal fade" id="logFormModal" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Log from (start_time) to (end_time), <%= @current_date %></h4>
+        <h4 class="modal-title">Log from <span id="logStartTime">(start_time)</span> to <span id="logEndTime">(end_time)</span>, <%= @current_date %></h4>
       </div>
       <div class="modal-body">
         <form id="logForm">
