@@ -3,7 +3,11 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .time-segment {
-  width: 200px;
+  width: 250px;
+}
+
+.time-disabled-segment {
+  background-color: #eee;
 }
 
 .ui-selecting { background: #FECA40; }

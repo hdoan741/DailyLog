@@ -24,7 +24,7 @@ $(document).ready(function() {
   });
 
   $('.time-selectable').selectable({
-    filter: '.time-segment',
+    filter: '.time-avail-segment',
     stop: function(evt, ui) {
       var selected_slots = $('.time-selectable').find('.ui-selected');
       if (selected_slots.size() > 0) {
