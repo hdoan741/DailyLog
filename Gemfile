@@ -21,6 +21,7 @@ end
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
+gem 'select2-rails'
 gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
                               :github => 'anjlab/bootstrap-rails'
 

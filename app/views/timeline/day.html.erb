@@ -8,7 +8,7 @@
       <% @time_segments.each_with_index do |segment_class, i| %>
         <tr>
           <td><%= i.even? ? "#{i / 2}:00"  : '--'  %></td>
-          <td class="time-segment <%= segment_class %>">
+          <td class="time-segment <%= segment_class %>" style="background-color: <%= @segment_bg[i] %>">
             <input type="hidden" class="time-slot-start" value="<%= slot_to_time_str(i) %>">
             <input type="hidden" class="time-slot-end" value="<%= slot_to_time_str(i+1) %>">
           </td>
@@ -22,7 +22,9 @@
     <ul id="activity-list">
       <% @logs.each do |log| %>
         <% if log.start_time && log.end_time %>
-          <li><%= log_to_html(log) %></li>
+          <li>
+            <%= log_to_html(log).html_safe %>
+          </li>
         <% end %>
       <% end %>
     </ul>
@@ -42,15 +44,23 @@
           <input type="hidden" id="logDateHidden" value="<%= @current_date %>"></input>
           <input type="hidden" name="start_time"></input>
           <div class="form-group">
+            <label for="logTagArea">Primary Tag</label>
+            <br/>
+            <select id="logTagSelect">
+              <%= @tags.each do |tag| %>
+                <option value="<%= tag.id %>" data-tag-color=<%= tag.color %>>
+                  <span><%= tag.title %></span>
+                </option>
+              <% end %>
+            </select>
+          </div>
+          <div class="form-group">
             <label for="logContentInput">Content</label>
             <input class="form-control" id="logContentInput">
           </div>
           <div class="form-group">
             <label for="logExtraTextarea">Extra</label>
             <textarea rows="5" class="form-control" id="logExtraTextarea"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="logTagArea">Tags</label>
           </div>
         </form>
       </div>

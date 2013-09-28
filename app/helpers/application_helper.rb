@@ -8,6 +8,8 @@ module ApplicationHelper
   end
 
   def log_to_html(log)
-     return "#{log.start_time.strftime("%H:%M")} - #{log.end_time.strftime("%H:%M")}: #{log.content.capitalize}"
+     return "<span class='glyphicon glyphicon-bookmark' style='color: #{log.main_tag.color if log.main_tag}'></span> " +
+        "#{log.start_time.strftime("%H:%M")} - #{log.end_time.strftime("%H:%M")}: #{
+           (log.content.empty? && log.main_tag) ? log.main_tag.title : log.content.capitalize }"
   end
 end

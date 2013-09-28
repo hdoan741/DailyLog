@@ -8,13 +8,17 @@ $(document).ready(function() {
     var current_date = $('#logDateHidden').val();
     var start_time = $('#logStartTime').html();
     var end_time = $('#logEndTime').html();
+    var selected_tag = $('#logTagSelect option:selected');
+    var tag_id = $(selected_tag).val();
+    var tag_color = $(selected_tag).data('tag-color');
     $.post('/logs', {
       log: {
         content: content,
         extra: extra,
         date: current_date,
         start_time: start_time,
-        end_time: end_time
+        end_time: end_time,
+        main_tag_id: tag_id
       }
     }, function(data) {
       console.log(data);
@@ -23,7 +27,9 @@ $(document).ready(function() {
 
       // alter the selected slots to reflect the new selection
       var selected_slots = $('.time-selectable').find('.ui-selected');
-      selected_slots.removeClass('time-avail-segment ui-selectee ui-selected').addClass('time-disabled-segment');
+      selected_slots.removeClass('time-avail-segment ui-selectee ui-selected')
+        .addClass('time-disabled-segment')
+        .css('background', tag_color);
 
       // add the new log to the bottom of the list, may add some animation
       var log_html = data.html_str;
@@ -48,5 +54,17 @@ $(document).ready(function() {
         $('#logFormModal').modal('show');
       }
     }
+  });
+
+  var formatTagSelectOption = function(state) {
+    var tag_color = $(state.element).data('tag-color');
+    return "<div class='tag-color-box-small' style='background-color: " + tag_color + "'></div><span>" + state.text + "</span>";
+  }
+
+  $('#logTagSelect').select2({
+    width: '100%',
+    formatResult: formatTagSelectOption,
+    formatSelection: formatTagSelectOption,
+    escapeMarkup: function(m) { return m; }
   });
 });
