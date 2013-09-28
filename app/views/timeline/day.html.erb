@@ -18,16 +18,21 @@
   </div>
   <div class="col-md-8">
     <h3>Activity</h3>
-    <hr>
-    <ul id="activity-list">
+    <table class="table table-hover" id="activity-list">
+      <colgroup>
+        <col width="5%">
+        <col width="18%">
+        <col>
+        <col width="12%">
+      </colgroup>
       <% @logs.each do |log| %>
         <% if log.start_time && log.end_time %>
-          <li>
+          <tr class="log-row">
             <%= render partial: "logs/log_li", locals: { log: log } %>
-          </li>
+          </tr>
         <% end %>
       <% end %>
-    </ul>
+    </table>
   </div>
 </div>
 

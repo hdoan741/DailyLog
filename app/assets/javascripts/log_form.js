@@ -1,4 +1,7 @@
 $(document).ready(function() {
+  $('p.log_extra:empty').hide();
+  // ---------------------
+  // Create Log
   $('#save_log').click(function() {
     // get title, content and other information
     $('#save_log').prop('disabled', true);
@@ -33,27 +36,9 @@ $(document).ready(function() {
 
       // add the new log to the bottom of the list, may add some animation
       var log_html = data.html_str;
-      $('#activity-list').append($('<li>').html(log_html));
+      $('#activity-list').append($('<tr class="log-row">').html(log_html));
+      $('p.log_extra:empty').hide();
     });
-  });
-
-  $('.time-selectable').selectable({
-    filter: '.time-avail-segment',
-    stop: function(evt, ui) {
-      var selected_slots = $('.time-selectable').find('.ui-selected');
-      if (selected_slots.size() > 0) {
-        var start_slot = $(selected_slots.first()).children('.time-slot-start').val();
-        var end_slot = $(selected_slots.last()).children('.time-slot-end').val();
-        console.log(start_slot, end_slot);
-
-        // update the log form
-        $('#logStartTime').html(start_slot);
-        $('#logEndTime').html(end_slot);
-
-        // open it
-        $('#logFormModal').modal('show');
-      }
-    }
   });
 
   var formatTagSelectOption = function(state) {
@@ -66,5 +51,23 @@ $(document).ready(function() {
     formatResult: formatTagSelectOption,
     formatSelection: formatTagSelectOption,
     escapeMarkup: function(m) { return m; }
+  });
+
+  // -----------------------
+  // Delete Log
+  $('#activity-list').on('click', '.remove_log', function(evt) {
+    evt.preventDefault();
+    $(this).prop('disabled', true);
+    var log_id= $(this).data('log-id');
+    var row = $(this).parents('tr');
+    $.ajax({
+      type: "DELETE",
+      url: "logs/" + log_id,
+      success: function(data) {
+        // now remove the row
+        $(row).remove();
+        // remove the blocks from the timeline
+      }
+    });
   });
 });

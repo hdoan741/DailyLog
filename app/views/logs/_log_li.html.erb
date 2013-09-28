@@ -1,4 +1,16 @@
-<span class='glyphicon glyphicon-bookmark' style='color: <%= log.main_tag.color if log.main_tag %>'></span>
-<span><%= log.start_time.strftime("%H:%M") %> - <%= log.end_time.strftime("%H:%M") %>:
-  <%= (log.content.empty? && log.main_tag) ? log.main_tag.title : log.content.capitalize %></span>
+<td><span class='glyphicon glyphicon-bookmark' style='color: <%= log.main_tag.color if log.main_tag %>'></span></td>
+<td>
+  <span class="log_time_segment"><%= log.start_time.strftime("%H:%M") %> - <%= log.end_time.strftime("%H:%M") %></span>
+</td>
+<td>
+  <span class="log_content"><%= (log.content.empty? && log.main_tag) ? log.main_tag.title : log.content.capitalize %></span>
+  <p class="log_extra"><%= log.extra %></p>
+</td>
+<td>
+  <div class="log_actions">
+    <input type="hidden" class="log_id" value="<%= log.id %>">
+    <a href='#' class="edit_log">Edit</a>
+    <a href='#' class="remove_log" data-log-id="<%= log.id %>">Delete</a>
+  </div>
+</td>
 

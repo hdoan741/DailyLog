@@ -14,7 +14,19 @@
 
 .ui-selected { background: #F39814; color: white; }
 
-#activity-list {
-  list-style: none;
+.log-row .glyphicon, .log-row .log_time_segment, .log-row .log_content {
   font-size: 1.2em;
 }
+
+.log-row .log_actions {
+  display: none;
+}
+
+tr.log-row:hover td div.log_actions {
+  display: block;
+}
+
+#activity-list.table td, .time-selectable.table td {
+     border: none;
+ }
+
