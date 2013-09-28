@@ -21,6 +21,7 @@ $(document).ready(function() {
       $('#save_tag').prop('disabled', false);
 
       console.log(data);
+      $('#tagTableBody').append(data.html_str);
     });
   });
 

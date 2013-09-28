@@ -23,7 +23,7 @@
       <% @logs.each do |log| %>
         <% if log.start_time && log.end_time %>
           <li>
-            <%= log_to_html(log).html_safe %>
+            <%= render partial: "logs/log_li", locals: { log: log } %>
           </li>
         <% end %>
       <% end %>

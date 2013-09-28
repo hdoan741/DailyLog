@@ -9,7 +9,8 @@ class TagsController < ApplicationController
       respond_to do |format|
         format.json { render json: {
           status: "OK",
-          tag: @tag
+          tag: @tag,
+          html_str: render_to_string(partial: "tag_row.html.erb", locals: { tag: @tag })
         } }
       end
     else

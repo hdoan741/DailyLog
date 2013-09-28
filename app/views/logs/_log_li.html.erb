@@ -1,0 +1,4 @@
+<span class='glyphicon glyphicon-bookmark' style='color: <%= log.main_tag.color if log.main_tag %>'></span>
+<span><%= log.start_time.strftime("%H:%M") %> - <%= log.end_time.strftime("%H:%M") %>:
+  <%= (log.content.empty? && log.main_tag) ? log.main_tag.title : log.content.capitalize %></span>
+

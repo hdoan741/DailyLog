@@ -7,7 +7,10 @@ class LogsController < ApplicationController
 
     if @log.save
       respond_to do |format|
-        format.json { render json: {log: @log, html_str: log_to_html(@log) } }
+        format.json { render json: {
+          log: @log,
+          html_str: render_to_string(partial: "log_li.html.erb", locals: { log: @log })
+        } }
       end
     else
       respond_to do |format|
