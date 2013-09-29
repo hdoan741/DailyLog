@@ -1,5 +1,8 @@
 $(document).ready(function() {
-  $('p.log_extra:empty').hide();
+
+  $('#logExtraFormGroup').collapse();
+
+  $('#logExtraFormGroup').collapse('hide');
 
   var updateTimeSegmentBorderColor = function(elem) {
     try {
@@ -41,11 +44,17 @@ $(document).ready(function() {
 
   var setFormData = function(data) {
     $('#logContentInput').val(data.content || '');
-    $('#LogExtraTextarea').val(data.extra || '');
+    $('#logExtraTextarea').val(data.extra || '');
     $('#logIdHidden').val(data.log_id || 0);
     $('#logStartTime').html(data.start_time || '');
     $('#logEndTime').html(data.end_time || '');
     $('#logTagSelect').select2('val', data.main_tag_id || '0');
+
+    if (data.extra) {
+      $('#logExtraFormGroup').collapse('show');
+    } else {
+      $('#logExtraFormGroup').collapse('hide');
+    }
   }
 
   // ---------------------
@@ -72,7 +81,6 @@ $(document).ready(function() {
       // add the new log to the bottom of the list, may add some animation
       var log_html = data.html_str;
       $('#activity-list').append($('<tr class="log-row">').html(log_html));
-      $('p.log_extra:empty').hide();
 
       $('#logFormModal').modal('hide');
     });
