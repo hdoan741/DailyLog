@@ -22,13 +22,14 @@ class LogsController < ApplicationController
 
   def update
     @log = Log.find(params[:id])
+    start_slot = time_to_slot(@log.start_time)
     if @log.update_attributes(params[:log])
       respond_to do |format|
         format.json { render json: {
           status: "OK",
           log: @log,
-          start_slot: time_to_slot(@log.start_time),
-          end_slot: time_to_slot(@log.end_time)
+          start_slot: start_slot,
+          end_slot: start_slot + slot_count(@log.end_time - @log.start_time)
         } }
       end
     else
@@ -40,13 +41,14 @@ class LogsController < ApplicationController
 
   def destroy
     @log = Log.find(params[:id])
+    start_slot = time_to_slot(@log.start_time)
     if @log.destroy
       respond_to do |format|
         format.json { render json: {
           status: "OK",
           log: @log,
-          start_slot: time_to_slot(@log.start_time),
-          end_slot: time_to_slot(@log.end_time)
+          start_slot: start_slot,
+          end_slot: start_slot + slot_count(@log.end_time - @log.start_time)
         } }
       end
     else

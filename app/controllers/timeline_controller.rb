@@ -13,9 +13,8 @@ class TimelineController < ApplicationController
       if log.start_time && log.end_time
         # identify the segments this log covers
         start_slot = time_to_slot(log.start_time)
-        end_slot = time_to_slot(log.end_time)
-        puts start_slot, end_slot
-        (start_slot..(end_slot-1)).each do |slot|
+        slot_count = slot_count(log.end_time - log.start_time)
+        (start_slot..(start_slot + slot_count - 1)).each do |slot|
           @time_segments[slot] = "time-disabled-segment"
           @segment_bg[slot] = log.main_tag.color
         end
