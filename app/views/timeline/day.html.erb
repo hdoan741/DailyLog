@@ -1,5 +1,23 @@
-<div class="page-header">
-  <h1><%= @current_date.strftime("%A, %d %B, %Y") %></h1>
+<div class="page-navigation">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="btn-group">
+        <%= link_to day_path(current_date: @current_date - 1, anchor: 'page-content'), class: "btn btn-default" do %>
+          <span class="glyphicon glyphicon-chevron-left"></span>
+        <% end %>
+
+        <%= link_to "Today", day_path(anchor: 'page-content'), class: "btn btn-default" %>
+
+        <%= link_to day_path(current_date: @current_date + 1, anchor: 'page-content'), class: "btn btn-default" do %>
+          <span class="glyphicon glyphicon-chevron-right"></span>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="pull-right"><%= @current_date.strftime("%A, %d %B, %Y") %></h3>
+    </div>
+  </div>
+  <hr>
 </div>
 
 <div class="row">
@@ -20,6 +38,7 @@
   </div>
   <div class="col-md-8">
     <h3>Activity</h3>
+    <hr/>
     <table class="table table-hover" id="activity-list">
       <colgroup>
         <col width="5%">
@@ -50,7 +69,7 @@
           <input type="hidden" id="logIdHidden" name="log_id"></input>
           <input type="hidden" id="logDateHidden" value="<%= @current_date %>"></input>
           <div class="form-group">
-            <label for="logTagArea">Primary Tag</label>
+            <label for="logTagArea">Group</label>
             <br/>
             <select id="logTagSelect">
               <%= @tags.each do |tag| %>

@@ -14,7 +14,7 @@ $(document).ready(function() {
   // Create Tag
   $('#create_tag').click(function() {
     // update title
-    $('#tagFormModal').find('.modal-title').html('Create Tag');
+    $('#tagFormModal').find('.modal-title').html('Create Group');
 
     $('#tagIdField').val(0);
     $('#tagTitleInput').val('');
@@ -52,7 +52,7 @@ $(document).ready(function() {
   $('#tagTableBody').on('click', '.edit_tag', function(evt) {
     evt.preventDefault();
      // update title
-    $('#tagFormModal').find('.modal-title').html('Update Tag');
+    $('#tagFormModal').find('.modal-title').html('Update Group');
 
     // get tag info & set to the field
     var tag_row = $(this).parents('tr');

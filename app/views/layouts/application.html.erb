@@ -8,6 +8,27 @@
 </head>
 <body>
 
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href='/'>Daily Log</a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li><a href='/'>Day</a></li>
+        <li><a href='#'>Week</a></li>
+        <li><a href='#'>Month</a></li>
+        <li><a href='#'>Calendar</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href='#'>Graphs</a></li>
+        <li><a href='<%= tags_url() %>'>Groups</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<a id="page-content"></a>
 <div class="container">
   <%= yield %>
 </div>

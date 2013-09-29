@@ -1,6 +1,6 @@
 class TimelineController < ApplicationController
   def day
-    @current_date = params[:current_date] || Date.today
+    @current_date = params[:current_date] ? Date.strptime(params[:current_date], '%Y-%m-%d') : Date.today
     @logs = Log.where(date: @current_date)
     @tags = Tag.all
 
