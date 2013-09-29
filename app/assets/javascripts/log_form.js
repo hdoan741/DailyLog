@@ -18,7 +18,7 @@ $(document).ready(function() {
   };
 
   $('#logFormModal').on('hidden.bs.modal', function() {
-    $('#save_tag').off('click');
+    $('#save_log').off('click');
     $('.edit_log').prop('disabled', false);
     var selected_slots = $('.time-selectable').find('.ui-selected');
     selected_slots.removeClass('ui-selected');
