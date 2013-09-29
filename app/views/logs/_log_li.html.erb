@@ -1,6 +1,8 @@
 <td><span class='glyphicon glyphicon-bookmark log_tag_icon' style='color: <%= log.main_tag.color if log.main_tag %>'></span></td>
 <td>
-  <span class="log_start_time"><%= log.start_time.strftime("%H:%M") %></span> - <span class="log_end_time"><%= log.end_time.strftime("%H:%M") %></span>
+  <div class="log_time_segment">
+    <span class="log_start_time"><%= log.start_time.strftime("%H:%M") %></span> - <span class="log_end_time"><%= log.end_time.strftime("%H:%M") %></span>
+  </div>
 </td>
 <td>
   <span class="log_content"><%= (log.content.empty? && log.main_tag) ? log.main_tag.title : log.content.capitalize %></span>

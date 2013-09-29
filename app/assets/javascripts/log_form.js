@@ -1,10 +1,31 @@
 $(document).ready(function() {
   $('p.log_extra:empty').hide();
 
+  var updateTimeSegmentBorderColor = function(elem) {
+    try {
+      var body_color = $(elem).css('backgroundColor');
+    } catch (e) {
+      $(elem).css('border-color', '#ddd');
+      return;
+    }
+    $(elem).css('border-color', body_color);
+  }
+
+  var updateTimelineBorderColor = function() {
+    $('.time-segment').each(function(index, elem) {
+      updateTimeSegmentBorderColor(elem);
+    });
+  };
+
   $('#logFormModal').on('hidden.bs.modal', function() {
     $('#save_tag').off('click');
     $('.edit_log').prop('disabled', false);
+    var selected_slots = $('.time-selectable').find('.ui-selected');
+    selected_slots.removeClass('ui-selected');
+    updateTimelineBorderColor();
   });
+
+  updateTimelineBorderColor();
 
   var getFormData = function() {
     var selected_tag = $('#logTagSelect option:selected');
@@ -152,6 +173,8 @@ $(document).ready(function() {
               .css('background', '');
           }
         });
+
+        updateTimelineBorderColor();
       }
     });
   });
@@ -166,11 +189,13 @@ $(document).ready(function() {
         var start_slot = $(selected_slots.first()).children('.time-slot-start').val();
         var end_slot = $(selected_slots.last()).children('.time-slot-end').val();
         console.log(start_slot, end_slot);
+        var first_tag_id = $('#logTagSelect option:first').val();
 
         // update the log form
         setFormData({
           start_time: start_slot,
-          end_time: end_slot
+          end_time: end_slot,
+          main_tag_id: first_tag_id
         });
 
         // enable the save_log button
@@ -179,6 +204,18 @@ $(document).ready(function() {
         // open it
         $('#logFormModal').modal('show');
       }
+    },
+    selecting: function(evt, ui) {
+      updateTimeSegmentBorderColor(ui.selecting);
+    },
+    selected: function(evt, ui) {
+      updateTimeSegmentBorderColor(ui.selected);
+    },
+    unselecting: function(evt, ui) {
+      updateTimeSegmentBorderColor(ui.unselecting);
+    },
+    unselected: function(evt, ui) {
+      updateTimeSegmentBorderColor(ui.unselected);
     }
   });
 
