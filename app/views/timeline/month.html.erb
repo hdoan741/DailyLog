@@ -1,0 +1,54 @@
+<div class="page-navigation">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="btn-group">
+        <%= link_to month_path(current_date: @current_date.prev_month, anchor: 'page-content'), class: "btn btn-default" do %>
+          <span class="glyphicon glyphicon-chevron-left"></span>
+        <% end %>
+
+        <%= link_to "This month", month_path(anchor: 'page-content'), class: "btn btn-default" %>
+
+        <%= link_to month_path(current_date: @current_date.next_month, anchor: 'page-content'), class: "btn btn-default" do %>
+          <span class="glyphicon glyphicon-chevron-right"></span>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="pull-right"><%= @current_date.strftime("%B, %Y") %></h3>
+    </div>
+  </div>
+  <hr>
+</div>
+
+<table class="table timeline-month">
+  <tr>
+    <th>Sun</th>
+    <th>Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+  </tr>
+  <% @month.each_with_index do |week, i| %>
+    <tr>
+      <% week.each_with_index do |day, j| %>
+        <td class="day-box">
+          <span class="<%= 'today-col' if day == @today %>">
+            <%= link_to day.strftime('%d'), day_path(current_date: day, anchor: 'page-content') %>
+          </span>
+          <table class="day-time-segments">
+            <tr>
+              <% 48.times.each do |k| %>
+                <td class="time-segment-horiz"
+                  style="<%= "background-color: #{@segment_month[i][j][k]}" unless @segment_month[i][j][k].empty? %>">
+                </td>
+              <% end %>
+            </tr>
+          </table>
+        </td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+

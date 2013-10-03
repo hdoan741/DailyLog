@@ -9,15 +9,15 @@
 <body>
 
 <nav class="navbar navbar-default" role="navigation">
-  <div class="container">
+  <div class="full-width-container">
     <div class="navbar-header">
       <a class="navbar-brand" href='/'>Daily Log</a>
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li><a href='/'>Day</a></li>
-        <li><a href='#'>Week</a></li>
-        <li><a href='#'>Month</a></li>
+        <li><a href='<%= week_url() %>'>Week</a></li>
+        <li><a href='<%= month_url() %>'>Month</a></li>
         <li><a href='#'>Calendar</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -29,8 +29,28 @@
 </nav>
 
 <a id="page-content"></a>
-<div class="container">
-  <%= yield %>
+<div class="full-width-container">
+  <div class="row">
+    <div class="col-lg-10">
+      <%= yield %>
+    </div>
+    <div class="col-lg-2">
+      <div class="tags-nav">
+        <div class="page-navigation">
+          <h4>Groups</h4>
+        </div>
+        <ul class="tag-list-nav">
+          <% @tags.each do |tag| %>
+            <li>
+              <div class='tag-color-box-small' style='background-color: <%= tag.color %>'></div>
+              <span><%= tag.title %></span>
+            </li>
+          <% end %>
+          <li><a href='<%= tags_url() %>'>Edit</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
 
 </body>

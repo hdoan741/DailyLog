@@ -1,0 +1,43 @@
+<div class="page-navigation">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="btn-group">
+        <%= link_to week_path(current_date: @current_date - 7, anchor: 'page-content'), class: "btn btn-default" do %>
+          <span class="glyphicon glyphicon-chevron-left"></span>
+        <% end %>
+
+        <%= link_to "This week", week_path(anchor: 'page-content'), class: "btn btn-default" %>
+
+        <%= link_to week_path(current_date: @current_date + 7, anchor: 'page-content'), class: "btn btn-default" do %>
+          <span class="glyphicon glyphicon-chevron-right"></span>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="pull-right"><%= @current_date.strftime("%A, %d %B, %Y") %></h3>
+    </div>
+  </div>
+  <hr>
+</div>
+
+<table class="table table-bordered timeline">
+  <tr>
+    <th width="5%"></th>
+    <% @week.each_with_index do |day, j | %>
+      <th class="<%= 'today-col' if day == @today %>">
+        <%= link_to day.strftime('%a %d'), day_path(current_date: day, anchor: 'page-content') %>
+      </th>
+    <% end %>
+  </tr>
+  <% 48.times.each do |i| %>
+    <tr>
+      <td class="time-ruler"><span class="time-ruler-num"><%= "#{i / 2}:00" if i.even? && i > 0 %></span></td>
+      <% @week.each_with_index do |day, j| %>
+        <td class="time-segment time-segment-week <%= i.even? ? "even-hour" : "odd-hour" %>"
+          style="<%= "background-color: #{@segment_bgs[j][i]}" unless @segment_bgs[j][i].empty? %>">
+        </td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+

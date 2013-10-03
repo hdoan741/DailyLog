@@ -2,14 +2,19 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.time-segment {
+.time-segment-day {
   width: 280px;
+}
+
+.time-segment-week {
+  width: 140px;
 }
 
 .time-ruler {
   position: relative;
   top: 0;
   left: 0;
+  width: 45px;
 }
 
 .time-ruler-num {
@@ -38,19 +43,28 @@ tr.log-row:hover td div.log_actions {
   display: block;
 }
 
-#activity-list.table td, .time-selectable.table td {
+.timeline.table, .timeline-month.table {
+  border-collapse: separate;
+  border-spacing: 5px 0;
+}
+
+#activity-list.table td, .timeline.table td, .timeline.table th {
   border: none;
 }
 
-.time-selectable.table td.even-hour {
+.timeline.table th, .timeline-month th {
+  border-bottom: 3px solid #ddd;
+}
+
+.timeline.table td.even-hour {
   border-bottom: dotted 1px #ddd;
 }
 
-.time-selectable.table td.odd-hour {
+.timeline.table td.odd-hour {
   border-bottom: solid 1px #ddd;
 }
 
-.time-selectable.table tbody tr td {
+.timeline.table tbody tr td {
   padding: 6px;
 }
 
@@ -61,4 +75,29 @@ tr.log-row:hover td div.log_actions {
 
 #activity-list p {
   margin: 0px;
+}
+
+.timeline.table th {
+  text-align: center;
+}
+
+.today-col a {
+  color: #c7254e;
+}
+
+/// ---------------------
+.timeline-month td, .timeline-month th {
+  text-align: right;
+}
+
+.timeline-month td.day-box {
+  height: 100px;
+}
+
+.day-time-segments {
+  height: 80px;
+}
+
+.timeline-month .time-segment-horiz {
+  width: 3px;
 }

@@ -21,13 +21,13 @@
 </div>
 
 <div class="row">
-  <div class="col-md-4">
-    <table class="table table-bordered time-selectable">
+  <div class="col-lg-4">
+    <table class="table table-bordered timeline time-selectable">
       <% @time_segments.each_with_index do |segment_class, i| %>
         <tr>
           <td class="time-ruler"><span class="time-ruler-num"><%= "#{i / 2}:00" if i.even? && i > 0 %></span></td>
           <%= puts @segment_bg[i] %>
-          <td class="time-segment <%= i.even? ? "even-hour" : "odd-hour" %> <%= segment_class %>"
+          <td class="time-segment time-segment-day <%= i.even? ? "even-hour" : "odd-hour" %> <%= segment_class %>"
             style="<%= "background-color: #{@segment_bg[i]}" unless @segment_bg[i].empty? %>">
             <input type="hidden" class="time-slot-start" value="<%= slot_to_time_str(i) %>">
             <input type="hidden" class="time-slot-end" value="<%= slot_to_time_str(i+1) %>">
@@ -36,7 +36,7 @@
       <% end %>
     </table>
   </div>
-  <div class="col-md-8">
+  <div class="col-lg-8">
     <h3>Activity</h3>
     <hr/>
     <table class="table table-hover" id="activity-list">
