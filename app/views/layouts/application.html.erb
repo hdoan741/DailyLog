@@ -31,23 +31,25 @@
 <a id="page-content"></a>
 <div class="full-width-container">
   <div class="row">
-    <div class="col-lg-10">
-      <%= yield %>
-    </div>
     <div class="col-lg-2">
       <div class="tags-nav">
-        <div class="page-navigation">
+        <div class="page-left-nav">
           <h4>Groups</h4>
+          <ul class="tag-list-nav">
+            <% @tags.each do |tag| %>
+              <li>
+                <div class='tag-color-box-small' style='background-color: <%= tag.color %>'></div>
+                <span><%= tag.title %></span>
+              </li>
+            <% end %>
+            <li><a href='<%= tags_url() %>'>Edit</a></li>
+          </ul>
         </div>
-        <ul class="tag-list-nav">
-          <% @tags.each do |tag| %>
-            <li>
-              <div class='tag-color-box-small' style='background-color: <%= tag.color %>'></div>
-              <span><%= tag.title %></span>
-            </li>
-          <% end %>
-          <li><a href='<%= tags_url() %>'>Edit</a></li>
-        </ul>
+      </div>
+    </div>
+    <div class="col-lg-10">
+      <div class="main-content">
+        <%= yield %>
       </div>
     </div>
   </div>

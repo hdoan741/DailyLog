@@ -22,7 +22,7 @@
 
 <div class="row">
   <div class="col-lg-4">
-    <table class="table table-bordered timeline time-selectable">
+    <table class="table timeline time-selectable">
       <% @time_segments.each_with_index do |segment_class, i| %>
         <tr>
           <td class="time-ruler"><span class="time-ruler-num"><%= "#{i / 2}:00" if i.even? && i > 0 %></span></td>
