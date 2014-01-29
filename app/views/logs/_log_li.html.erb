@@ -6,7 +6,7 @@
 </td>
 <td>
   <span class="log_content"><%= (log.content.empty? && log.main_tag) ? log.main_tag.title : log.content %></span>
-  <p class="log_extra"><%= log.extra %></p>
+  <p class="log_extra"><%= log.extra.html_safe %></p>
 </td>
 <td>
   <div class="log_actions">
